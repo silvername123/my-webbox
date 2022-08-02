@@ -1,0 +1,99 @@
+body {
+	padding: 0 16px;
+	/*设置内边距，上下为0px，左右为16px*/
+	margin: 0;
+	/* 设置外边距,上下左右都为0px */
+	box-sizing: border-box;
+	/* 当内容部分超出边框的范围，将重新计算内容部分大小，使内容始终在边框内部 */
+	width: 100%;
+	/* 宽度,与容器的宽度相同 */
+}
+
+input,
+button {
+	font-size: 14px;
+	/* 字体大小 */
+}
+
+input {
+	width: 70%;
+	height: 30px;
+	border-radius: 5px;
+	/* 边框圆角，左上、右上、右下、左下四个角都为5px */
+	background-color: #f5f5f5;
+	/* 背景颜色，16进制表示法，前两位代表red,中间两位代表green，后两位代表blue */
+	padding: 5px 10px;
+	position: relative;
+	/* 设置元素定位，相对定位，内部定位为absolute的元素会以此为基准进行定位 */
+	border: none;
+	/* 设置边框，none代表没有边框 */
+}
+
+button {
+	padding: 10px;
+	box-sizing: content-box;
+	text-align: center;
+	/* 设置内容对齐方式，center代表居中展示 */
+	border-radius: 5px;
+	border: none;
+	width: 70%;
+}
+
+.container {
+	width: 100%;
+	text-align: center;
+	display: flex;
+	/* 设置布局方式，flex弹性布局 */
+	align-items: center;
+	/* flex布局特有，设置竖直方向展示方式,center代表居中 */
+	justify-content: center;
+	/* flex布局特有，设置水平方向展示方式，center代表居中 */
+}
+
+.disabled {
+	color: darkgray;
+	background-color: rgb(200, 200, 200);
+}
+
+.active {
+	color: #fff;
+	/* 设置内容区字体颜色 */
+	background-color: rgb(60, 140, 250);
+}
+
+.popup {
+	z-index: 100;
+	/* 层级设置，z-index越高，元素越靠上，类似3D效果的z轴 */
+	height: 80px;
+	width: 70%;
+	position: fixed;
+	/* 设置定位，fixed表示固定定位，当页面滑动时，该元素位置不变 */
+	top: 35vh;
+	/* 当元素含position属性时生效，距离容器顶部距离 */
+	background-color: rgba(255, 255, 255, 0.5);
+	text-align: center;
+	-webkit-transform: translateZ(0);
+	-webkit-mask-image: -webkit-radial-gradient(circle, white 100%, black 100%);
+	border-radius: 10px;
+	display: none;
+}
+
+.overlay {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.3);
+	display: none;
+	/*设置展示方式，none为不展示*/
+}
+
+.popup span {
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type='text/css' href="css/login.css">
+	</head>
+	<body>
+		<img style="height:65px;width:125px;margin-top:60px;padding:10px 0;" 
+		src="img/baidu_resultlogo.png" />
+		<div style="font-size:30px;">欢迎登陆百度账号</div>
+		<div style="margin-top:30px;" class="container">
+			<input id="account" 
+			placeholder-style="color:#aaa" 
+			placeholder="请输入手机号/用户名/邮箱" 
+			oninput="handleInput(this)" type="text" />
+		</div>
+		<div style="margin-top: 15px;" class="container">
+			<input id="password" 
+			placeholder="请输入登陆密码" 
+			type="password" 
+			oninput="handleInput(this)" />
+			<img src="img/open.png" 
+			style="height:13px;position:absolute;right:18%;" 
+			onclick="changeVisable(this)" />
+		</div>
+		<div class="container" style="margin-top:40px;">
+			<button id="login" class="disabled" onclick="login()">登录</button>
+		</div>
+		<div class='overlay'></div>
+		<div class='container'>
+			<div id="popup" class="popup">
+				<span id='message' style="border-bottom: 1px solid #ccc;height:60%;">asdad</span>
+				<span style="height:40%;color:#496DFF;" onclick='closePopup()'>知道了</span>
+			</div>
+			<div>
+	</body>
+	<script type="text/javascript" src="js/login.js"></script>
+</html>

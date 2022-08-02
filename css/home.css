@@ -1,0 +1,129 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+
+
+.userInfo {
+	margin: 120px 0 0 20px;
+	height: 120px;
+	display: flex;
+	width: 100%;
+	align-items: center;
+}
+
+.userInfo span {
+	font-size: 50px;
+}
+
+.grid {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.grid img {
+	width: 80%;
+	margin: 20px 0;
+}
+
+.grid div {
+	text-align: center;
+	font-size: 30px;
+}
+
+.container {
+	display: flex;
+	justify-content: space-around;
+	/*内容区均匀分布*/
+	width: 100%;
+	margin: 30px 0;
+}
+
+.tabbar {
+	width: 100%;
+	height: 180px;
+	background-color: #f5f5f5;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+}
+
+.tabbar>span {
+	width: 50%;
+	height: 100%;
+}
+
+.tabbar>span>div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	/*flex布局的方向,column为竖直排版*/
+	height: 100%;
+	color: #999;
+}
+.inputtext {
+	width: 100%;
+	text-align: center;
+	display: flex;
+	/* 设置布局方式，flex弹性布局 */
+	align-items: center;
+	/* flex布局特有，设置竖直方向展示方式,center代表居中 */
+	justify-content: center;
+	/* flex布局特有，设置水平方向展示方式，center代表居中 */
+}
+.popup {
+	z-index: 100;
+	/* 层级设置，z-index越高，元素越靠上，类似3D效果的z轴 */
+	height: 310px;
+	width: 70%;
+	position: fixed;
+	/* 设置定位，fixed表示固定定位，当页面滑动时，该元素位置不变 */
+	top: 35vh;
+	/* 当元素含position属性时生效，距离容器顶部距离 */
+	background-color: rgba(0, 0, 0, 1);
+	/* text-align: center; */
+	-webkit-transform: translateZ(0);
+	-webkit-mask-image: -webkit-radial-gradient(circle , white 100%, black 100%);
+	border-radius: 40px;
+	display: none;
+}
+.popup input{
+	font-size: 40px;
+	height: 140px;
+	width: 100%;
+	outline:none;
+	border:none ;
+}
+.popup span:first-child{
+	font-size: 60px;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	align-items:center;
+	justify-content: center;
+}
+.popup span:last-child{
+	font-size: 55px;
+	width: 100%;
+	background-color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#out{
+	    border: 1px solid darkblue;
+	    
+	    background-color: #f5f5f5;
+	    position: absolute;
+	    font-size: 48px;
+	    top: 85%;
+	    left: 20%;
+	    width: 600px;
+	    text-align: center;
+	    border-radius: 80px;
+	
+	
+}

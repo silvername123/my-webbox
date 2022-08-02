@@ -1,0 +1,119 @@
+body {
+	padding: 0;
+	margin: 0;
+}
+.waiting {
+			display: flex;
+	        /*垂直排列*/
+	        flex-direction: column;
+	        align-items:center;
+			/* 由于flex-direction: column，因此align-items代表的是水平方向 */
+	        justify-content: center;
+			/* 由于flex-direction: column，因此justify-content代表的是垂直方向 */
+}
+.waiting img{
+	padding-top: 400px;
+	height:70%;
+}
+.fileitem {
+	display: flex;
+	margin-left: 20px;
+	/* height: 100px; */
+	align-items: center;
+	margin: 20px 0 20px 20px;
+	padding: 20px 0;
+	width: 95%;
+	border-bottom: 1px solid #A9A9A9;
+}
+
+.fileitem img {
+	width: 150px;
+	height: 150px;
+	margin: 20px;
+}
+
+.fileitem>div {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.filename {
+	font-size: 30px;
+	font-weight: 600;
+	margin: 10px 20px;
+}
+.date {
+	font-size: 30px;
+	margin: 10px 20px;
+	color: #999;
+}
+
+.search {
+	position: relative;
+	top:-50px;
+	/* margin-top: 20px; */
+}
+.search input {
+	padding: 5px 80px;
+	height: 80px;
+	font-size: 40px;
+	border-radius: 20px;
+	width: 95%;
+	margin: 20px 0 0 20px;
+	background-color: #f5f5f5;
+	border: none;
+	box-sizing: border-box;
+}
+
+.search img {
+	height: 40px;
+	width: 40px;
+	position: absolute;
+	left: 45px;
+	top: 30px;
+}
+
+.search div {
+	margin: 20px 0 0 20px;
+	width: 85%;
+	background-color: #A9A9A9;
+	height: 1px;
+}
+#title{
+	margin: 0;
+	position: relative;
+	top:-50px;
+	background: #F5F5F5;
+	height: 200px;
+	width: 100%;
+	}
+#title span{
+		position: absolute;
+		top:95px;
+		left: 150px;
+		font-size: 50px;
+	}
+.tabbar {
+	width: 100%;
+	height: 180px;
+	background-color: #f5f5f5;
+	position: fixed;
+	bottom: 0;
+	display: flex;
+}
+
+.tabbar>span {
+	width: 50%;
+	height: 100%;
+}
+
+.tabbar>span>div {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	height: 100%;
+	color: #999;
+}
+

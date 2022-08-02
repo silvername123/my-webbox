@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/search.css">
+	</head>
+	<body>
+		<div class="search">
+			<input autofocus="true" placeholder="搜索我的网盘文件" onchange='insertData(this.value)'>
+			<img src="img/search.png">
+			<span onclick="goBack()">取消</span>
+		</div>
+		<div style="font-size: 35px;font-weight: bold;margin:30px;">搜索历史</div>
+		<div id="searchlist"></div>
+		<div style="height:100px;width: 100%;"></div>
+		<div class="clearAll" onclick="deleteAllData()">清空历史记录</div>
+		<script>
+			let token = localStorage.getItem('token');
+			window.onload = () => {
+				document.addEventListener('plusready', function() {
+					plus.sqlite.openDatabase({
+						name: 'BDisk',
+						path: '_doc/search.db',
+						success: function() {
+							console.log('opendatabase success!');
+							createTable();
+						},
+						fail: function(e) {
+							console.log(JSON.stringify(e))
+						}
+					});
+				})
+			}
+
+			function renderSearchList() {
+				let selectSql = 'SELECT * FROM SEARCH'; //查询SQL语句
+				plus.sqlite.selectSql({
+					name: 'BDisk',
+					sql: selectSql,
+					success: function(data) {
+						console.log(data)
+						for (let i = data.length - 1; i >= 0; i--) {
+							let search = document.getElementById('searchlist');
+							let div = document.createElement('div');
+							div.setAttribute('class', 'searchlist');
+							let span = document.createElement('span');
+							let innerImg = document.createElement('img');
+							innerImg.src = 'img/time.png';
+							span.appendChild(innerImg);
+							let innerSpan = document.createElement('span');
+							innerSpan.innerText = data[i].value;
+							span.appendChild(innerSpan);
+							div.appendChild(span);
+							let img = document.createElement('img');
+							img.src = 'img/delete.png';
+							img.id = data[i].id;
+							img.addEventListener('click', function() {
+								deleteData(this.id);
+							}, false);
+							div.appendChild(img);
+							div.addEventListener('click', function(e) {
+								let input = document.querySelector('.search>input');
+								input.value = e.target.innerText;
+								insertData(e.target.innerText);
+							});
+							search.appendChild(div);
+						}
+					},
+					fail: function(e) {
+						console.log(JSON.stringify(e))
+					}
+				})
+			}
+
+			function createTable() {
+				let createTableSql = 'CREATE TABLE IF NOT EXISTS SEARCH(id INTEGER PRIMARY KEY AUTOINCREMENT,value TEXT unique)'; //建表sql语句
+				plus.sqlite.executeSql({
+					name: 'BDisk',
+					sql: createTableSql,
+					success: function() {
+						renderSearchList()
+					},
+					fail: function(e) {
+						console.log(JSON.stringify(e))
+					}
+				})
+			}
+
+			function insertData(key) {
+				let selectSql = "SELECT * FROM SEARCH WHERE value='" + key + "'";
+				let insertSql = 'INSERT INTO SEARCH (value) VALUES ("' + key + '")'; //新增sql语句
+				if (key && key.trim()) {
+					plus.sqlite.selectSql({
+						name: 'BDisk',
+						sql: selectSql,
+						success: function(data) {
+							console.log('数据已存在');
+							let isOpen = plus.sqlite.isOpenDatabase({
+								name: 'BDisk',
+								path: '_doc/search.db'
+							});
+							if (isOpen) {
+								plus.sqlite.closeDatabase({
+									name: 'BDisk',
+									success: function() {
+										console.log('database closed!');
+									},
+									fail: function(e) {
+										console.log(JSON.stringify(e))
+									}
+								})
+							}
+							window.location.href = 'filefolder.html?key=' + encodeURI(key);
+						},
+						fail: function(e) {
+							plus.sqlite.executeSql({
+								name: 'BDisk',
+								sql: insertSql,
+								success: function() {
+									let isOpen = plus.sqlite.isOpenDatabase({
+										name: 'BDisk',
+										path: '_doc/search.db'
+									});
+									if (isOpen) {
+										plus.sqlite.closeDatabase({
+											name: 'BDisk',
+											success: function() {
+												console.log('database closed!');
+											},
+											fail: function(e) {
+												console.log(JSON.stringify(e))
+											}
+										})
+									}
+									window.location.href = 'filefolder.html?key=' + encodeURI(key);
+								},
+								fail: function(e) {
+									console.log('insert failed');
+									console.log(e);
+								}
+							})
+						}
+					});
+				}
+			}
+
+			function deleteData(id) {
+				let deleteSql = 'DELETE FROM SEARCH WHERE ID=' + id; //带条件的删除语句
+				plus.sqlite.executeSql({
+					name: 'BDisk',
+					sql: deleteSql,
+					success: function() {
+						let search = document.getElementById('searchlist');
+						search.innerHTML = '';
+						renderSearchList();
+					},
+					fail: function() {
+						console.log('delete failed!')
+					}
+				})
+			}
+
+			function deleteAllData() {
+				let deleteSql = 'DELETE FROM SEARCH'; //删除所有sql语句
+				plus.sqlite.executeSql({
+					name: 'BDisk',
+					sql: deleteSql,
+					success: function() {
+						let search = document.getElementById('searchlist');
+						search.innerHTML = '';
+					},
+					fail: function() {
+						console.log('delete all failed!')
+					}
+				})
+			}
+
+			function goBack() {
+				let isOpen = plus.sqlite.isOpenDatabase({
+					name: 'BDisk',
+					path: '_doc/search.db'
+				});
+				if (isOpen) {
+					plus.sqlite.closeDatabase({
+						name: 'BDisk',
+						success: function() {
+							console.log('database closed!');
+						},
+						fail: function(e) {
+							console.log(JSON.stringify(e))
+						}
+					})
+				}
+				window.location.href = 'filefolder.html';
+			}
+
+			function clearSearch(e) { //通过点击事件,将点击节点设置为隐藏
+				e.parentNode.style.display = 'none';
+			}
+
+			function clearAllSearch() { //将所有历史搜索记录设为隐藏
+				let searchlists = document.getElementsByClassName('searchlist');
+				for (let i = 0; i < searchlists.length; i++) {
+					if (searchlists[i].style.display !== 'none')
+						searchlists[i].style.display = 'none';
+				}
+			}
+		</script>
+	</body>
+</html>

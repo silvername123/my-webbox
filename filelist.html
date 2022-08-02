@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/filelist.css">
+		<meta name="viewport" content="user-scalable=no" />
+	</head>
+	<body>
+		<div id="title" onclick="goBack()">
+			<img style="position:relative; top:100px;left: 30px;height:70px" src="img/mobile-back.png">
+			<span id="header"></span>
+		</div>
+		<div id="filelist">
+		</div>
+		<div class="tabbar">
+			<span>
+				<div id="file" style="color:rgb(60,140,250)">
+					<img src="img/bottombar_btn_file_pre.png" style="width:70px;">
+					<div style="font-size:30px;font-weight: 700;">文件</div>
+				</div>
+			</span>
+			<span>
+				<div id="person" onclick="changeTab()">
+					<img src="img/swan_app_user_portrait_pressed.png" style="width:70px;">
+					<div style="font-size:30px;font-weight: 700;">我的</div>
+				</div>
+			</span>
+		</div>
+	</body>
+	<script src="js/filelist.js"></script>
+</html>
